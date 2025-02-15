@@ -5,17 +5,44 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --primary: #6500B0; /* Matches project theme */
+  --secondary: #20005A; /* Matches gradient style */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
-    --foreground: #ededed;
+    --foreground: #f5f5f5; /* Lighter for better contrast */
   }
 }
 
+/* Apply styles globally */
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  @apply text-[var(--foreground)] bg-[var(--background)] font-sans transition-colors duration-300;
+}
+
+/* Ensure dark mode works with Tailwind's "dark:" class */
+.dark {
+  --background: #0a0a0a;
+  --foreground: #f5f5f5;
+}
+
+/* Optional: Gradient background for sections */
+.gradient-bg {
+  background: linear-gradient(to right, var(--primary), var(--secondary));
+}
+
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  animation: marquee 30s linear infinite;
 }
